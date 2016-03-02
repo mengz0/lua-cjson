@@ -12,6 +12,7 @@
 
 ##### Build defaults #####
 LUA_VERSION =       5.1
+LUAJIT_VERSION =    2.1
 TARGET =            cjson.so
 PREFIX =            /usr/local
 #CFLAGS =            -g -Wall -pedantic -fno-inline
@@ -19,6 +20,7 @@ CFLAGS =            -O3 -Wall -pedantic -DNDEBUG
 CJSON_CFLAGS =      -fpic
 CJSON_LDFLAGS =     -shared
 LUA_INCLUDE_DIR =   $(PREFIX)/include
+LUAJIT_INCLUDE_DIR = $(PREFIX)/include/luajit-$(LUAJIT_VERSION)
 LUA_CMODULE_DIR =   $(PREFIX)/lib/lua/$(LUA_VERSION)
 LUA_MODULE_DIR =    $(PREFIX)/share/lua/$(LUA_VERSION)
 LUA_BIN_DIR =       $(PREFIX)/bin
@@ -79,7 +81,7 @@ EXECPERM =          755
 
 ASCIIDOC =          asciidoc
 
-BUILD_CFLAGS =      -I$(LUA_INCLUDE_DIR) $(CJSON_CFLAGS)
+BUILD_CFLAGS =      -I$(LUA_INCLUDE_DIR) -I$(LUAJIT_INCLUDE_DIR)  $(CJSON_CFLAGS)
 OBJS =              lua_cjson.o strbuf.o $(FPCONV_OBJS)
 
 .PHONY: all clean install install-extra doc
